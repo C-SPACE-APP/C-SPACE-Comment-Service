@@ -1,4 +1,4 @@
-const {createPost,getPostsByPage,getPostOne, getHotPostsByPage, getNewPostsByPage, getTopPostsByPage} = require('../controllers/controllers')
+const {createComment, getCommentsByPost} = require('../controllers/controllers')
 const {Authorize} = require('../middlewares')
 const express = require('express');
 
@@ -6,20 +6,9 @@ const express = require('express');
 const router = express.Router()
 
 
-router.post('/createPost',createPost)
+router.post('/createComment',createComment)
 
-router.get('/getPostsByPage/:pageNumber/:limitPerPage/:query',getPostsByPage)
-router.get('/getPostsByPage/:pageNumber/:limitPerPage',getPostsByPage)
+router.get('/getPostsByPage/:pageNumber/:limitPerPage/:query',getCommentsByPost)
 
-router.get('/getHotPostsByPage/:pageNumber/:limitPerPage/:query',getHotPostsByPage)
-router.get('/getHotPostsByPage/:pageNumber/:limitPerPage',getHotPostsByPage)
-
-router.get('/getNewPostsByPage/:pageNumber/:limitPerPage/:query',getNewPostsByPage)
-router.get('/getNewPostsByPage/:pageNumber/:limitPerPage',getNewPostsByPage)
-
-router.get('/getTopPostsByPage/:pageNumber/:limitPerPage/:query',getTopPostsByPage)
-router.get('/getTopPostsByPage/:pageNumber/:limitPerPage',getTopPostsByPage)
-
-router.get('/getPostOne/:postID',getPostOne)
 
 module.exports = router; 

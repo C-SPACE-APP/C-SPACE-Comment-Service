@@ -3,8 +3,8 @@ const establishConnection = require('./establishConnection')
 const initializeDatabase = async () =>
 {
     let isSuccessful = false
-    const createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS PostService;"
-    const createTableQuery = "CREATE TABLE IF NOT EXISTS Post(postID INT PRIMARY KEY AUTO_INCREMENT, title TEXT, description TEXT, createdAt DATETIME, updatedAt DATETIME);"
+    const createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS CommentService;"
+    const createTableQuery = "CREATE TABLE IF NOT EXISTS Comment(commentID INT PRIMARY KEY AUTO_INCREMENT, comment TEXT, createdAt DATETIME, updatedAt DATETIME);"
     let connection
     try
     {
