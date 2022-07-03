@@ -1,4 +1,4 @@
-const {createComment, getCommentsByPost} = require('../controllers/controllers')
+const {createComment, getCommentsByPost, getAnswersByUsername} = require('../controllers/controllers')
 const {Authorize} = require('../middlewares')
 const express = require('express');
 
@@ -10,5 +10,6 @@ router.post('/createComment',createComment)
 
 router.get('/getPostsByPage/:pageNumber/:limitPerPage/:query',getCommentsByPost)
 
+router.get('/getAnswersByUsername/:userID',getAnswersByUsername)
 
 module.exports = router; 

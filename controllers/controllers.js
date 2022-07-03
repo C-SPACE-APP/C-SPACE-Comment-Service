@@ -79,5 +79,37 @@ const getCommentsByPost = async (req,res) => {
 }
 
 
+const getAnswersByUsername = async (req,res) => {
+    const reqLength = Object.keys(req.params).length
+    const {userID} = req.params
+    // request validation, if postID is not included in the request parameters,
+    // the request will fail.
+    if(reqLength != 1 || !userID)
+        return res.status(400).json({
+            message:"Bad request"
+        })
+    
+    let connection = await establishConnection(true)
+    
+    try
+    {
+        commentArr = await connection.execute("SELECT * FROM InteractionService.interaction LEFT JOIN CommentService.comment ON InteractionService.interaction.commentID = CommentService.comment.commentID WHERE InteractionService.interaction.userID = ? AND InteractionService.interaction.commentID IS NOT NULL AND InteractionService.interaction.parentID IS NULL ORDER BY PostService.post.createdAt DESC",[userID])
+    }   
+    catch(err)
+    {
+        await connection.destroy()
+        return res.status(400).json({returnData:null,message:`${err}`})
+    }
+    await connection.destroy()
 
-module.exports = {createComment,getCommentsByPost}
+    // returns either true or false depending if the credentials matched with the database
+    if (commentArr)
+        res.status(200).json({returnData:commentArr[0]})
+    else
+        res.status(200).json({returnData:null})
+}
+
+
+
+
+module.exports = {createComment,getCommentsByPost,getAnswersByUsername}
